@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { Header } from '@/components/header';
 import { Sidebar } from '@/components/sidebar';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 type DashboardLayoutProps = Readonly<{
 	children: ReactNode;

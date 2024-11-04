@@ -1,25 +1,4 @@
 export default async function DashboardPage() {
-	const services = [
-		{
-			id: 1,
-			icon: 'briefcase',
-			title: 'Business loans',
-			subtitle: 'It is a long established',
-		},
-		{
-			id: 2,
-			icon: 'bank',
-			title: 'Checking accounts',
-			subtitle: 'Lorem Ipsum',
-		},
-		{
-			id: 3,
-			icon: 'chart',
-			title: 'Savings accounts',
-			subtitle: 'It is a long established',
-		},
-	];
-
 	return (
 		<>
 			<h2 className="text-xl font-semibold text-gray-700 mb-6">
@@ -48,3 +27,24 @@ export default async function DashboardPage() {
 		</>
 	);
 }
+
+const services = [
+	{
+		id: 1,
+		icon: 'briefcase',
+		title: 'Business loans',
+		subtitle: 'It is a long established',
+	},
+	{
+		id: 2,
+		icon: 'bank',
+		title: 'Checking accounts',
+		subtitle: 'Lorem Ipsum',
+	},
+	{
+		id: 3,
+		icon: 'chart',
+		title: 'Savings accounts',
+		subtitle: 'It is a long established',
+	},
+];

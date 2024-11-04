@@ -1,0 +1,7 @@
+query GetCarDetails($carId: Int!) {
+    getCarDetails(params: { carId: $carId }) {
+        car {
+            id
+        }
+    }
+}
