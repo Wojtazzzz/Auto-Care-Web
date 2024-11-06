@@ -1,10 +1,11 @@
 import { clsx } from 'clsx';
+import { formatUnixDate } from '@/utils/functions';
 
 type CarCardProps = {
 	name: string;
 	vin: string;
-	insuranceTo: string;
-	periodicServiceTo: string;
+	insuranceTo: string | null;
+	periodicServiceTo: string | null;
 	weight: number;
 };
 
@@ -38,11 +39,17 @@ export const CarCard = ({
 			<div className="flex justify-between mt-4">
 				<div>
 					<p className="text-sm">Przegląd do:</p>
-					<p className="text-sm font-semibold">{periodicServiceTo}</p>
+					<p className="text-sm font-semibold">
+						{periodicServiceTo
+							? formatUnixDate(periodicServiceTo, 'DD/MM/YYYY')
+							: '-'}
+					</p>
 				</div>
 				<div>
 					<p className="text-sm">Ubezpieczenie do:</p>
-					<p className="text-sm font-semibold text-right">{insuranceTo}</p>
+					<p className="text-sm font-semibold text-right">
+						{insuranceTo ? formatUnixDate(insuranceTo, 'DD/MM/YYYY') : '-'}
+					</p>
 				</div>
 			</div>
 			<div className="mt-2">

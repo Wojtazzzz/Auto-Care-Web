@@ -15,13 +15,13 @@ import * as types from './graphql';
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "query GetCarDetails($carId: Int!) {\n  getCarDetails(params: {carId: $carId}) {\n    car {\n      id\n    }\n  }\n}": types.GetCarDetailsDocument,
+    "query GetUserCars($limit: Int!) {\n  getUserCars(params: {limit: $limit}) {\n    cars {\n      ...UserCar\n    }\n  }\n}\n\nfragment UserCar on Car {\n  id\n  name\n  vin\n  weight\n  Insurance {\n    id\n    expiredAt\n  }\n  PeriodicService {\n    id\n    expiredAt\n  }\n}": types.GetUserCarsDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetCarDetails($carId: Int!) {\n  getCarDetails(params: {carId: $carId}) {\n    car {\n      id\n    }\n  }\n}"): typeof import('./graphql').GetCarDetailsDocument;
+export function graphql(source: "query GetUserCars($limit: Int!) {\n  getUserCars(params: {limit: $limit}) {\n    cars {\n      ...UserCar\n    }\n  }\n}\n\nfragment UserCar on Car {\n  id\n  name\n  vin\n  weight\n  Insurance {\n    id\n    expiredAt\n  }\n  PeriodicService {\n    id\n    expiredAt\n  }\n}"): typeof import('./graphql').GetUserCarsDocument;
 
 
 export function graphql(source: string) {

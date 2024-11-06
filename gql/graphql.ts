@@ -23,35 +23,54 @@ export type AuthUserVerification = {
 
 export type Car = {
   __typename?: 'Car';
+  Insurance: Array<Insurance>;
+  PeriodicService: Array<PeriodicService>;
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  vin: Scalars['String']['output'];
+  weight: Scalars['Int']['output'];
+};
+
+export type GetUserCarsRequest = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type GetUserCarsResponse = {
+  __typename?: 'GetUserCarsResponse';
+  cars: Array<Car>;
+};
+
+export type Insurance = {
+  __typename?: 'Insurance';
+  expiredAt: Scalars['String']['output'];
   id: Scalars['Int']['output'];
 };
 
-export type GetCarDetailsRequest = {
-  carId: Scalars['Int']['input'];
-};
-
-export type GetCarDetailsResponse = {
-  __typename?: 'GetCarDetailsResponse';
-  car: Car;
+export type PeriodicService = {
+  __typename?: 'PeriodicService';
+  expiredAt: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  getCarDetails: GetCarDetailsResponse;
+  getUserCars: GetUserCarsResponse;
   verify: AuthUserVerification;
 };
 
 
-export type QueryGetCarDetailsArgs = {
-  params: GetCarDetailsRequest;
+export type QueryGetUserCarsArgs = {
+  params: GetUserCarsRequest;
 };
 
-export type GetCarDetailsQueryVariables = Exact<{
-  carId: Scalars['Int']['input'];
+export type GetUserCarsQueryVariables = Exact<{
+  limit: Scalars['Int']['input'];
 }>;
 
 
-export type GetCarDetailsQuery = { __typename?: 'Query', getCarDetails: { __typename?: 'GetCarDetailsResponse', car: { __typename?: 'Car', id: number } } };
+export type GetUserCarsQuery = { __typename?: 'Query', getUserCars: { __typename?: 'GetUserCarsResponse', cars: Array<{ __typename?: 'Car', id: number, name: string, vin: string, weight: number, Insurance: Array<{ __typename?: 'Insurance', id: number, expiredAt: string }>, PeriodicService: Array<{ __typename?: 'PeriodicService', id: number, expiredAt: string }> }> } };
+
+export type UserCarFragment = { __typename?: 'Car', id: number, name: string, vin: string, weight: number, Insurance: Array<{ __typename?: 'Insurance', id: number, expiredAt: string }>, PeriodicService: Array<{ __typename?: 'PeriodicService', id: number, expiredAt: string }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -67,13 +86,41 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
-
-export const GetCarDetailsDocument = new TypedDocumentString(`
-    query GetCarDetails($carId: Int!) {
-  getCarDetails(params: {carId: $carId}) {
-    car {
-      id
+export const UserCarFragmentDoc = new TypedDocumentString(`
+    fragment UserCar on Car {
+  id
+  name
+  vin
+  weight
+  Insurance {
+    id
+    expiredAt
+  }
+  PeriodicService {
+    id
+    expiredAt
+  }
+}
+    `, {"fragmentName":"UserCar"}) as unknown as TypedDocumentString<UserCarFragment, unknown>;
+export const GetUserCarsDocument = new TypedDocumentString(`
+    query GetUserCars($limit: Int!) {
+  getUserCars(params: {limit: $limit}) {
+    cars {
+      ...UserCar
     }
   }
 }
-    `) as unknown as TypedDocumentString<GetCarDetailsQuery, GetCarDetailsQueryVariables>;
+    fragment UserCar on Car {
+  id
+  name
+  vin
+  weight
+  Insurance {
+    id
+    expiredAt
+  }
+  PeriodicService {
+    id
+    expiredAt
+  }
+}`) as unknown as TypedDocumentString<GetUserCarsQuery, GetUserCarsQueryVariables>;

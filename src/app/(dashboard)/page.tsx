@@ -1,7 +1,11 @@
 import { ServicesList } from '@/components/modules/dashboard/services-list';
 import { MyCarsList } from '@/components/modules/dashboard/my-cars';
+import { fetchGraphData } from '@/utils/functions';
+import { GetUserCarsDocument } from '../../../gql/graphql';
 
 export default async function DashboardPage() {
+	const { data } = await fetchGraphData(GetUserCarsDocument, { limit: 5 });
+
 	return (
 		<div className="space-y-8">
 			<section>
@@ -9,7 +13,7 @@ export default async function DashboardPage() {
 					Moje pojazdy
 				</h2>
 
-				<MyCarsList cars={cars} />
+				<MyCarsList cars={data?.getUserCars.cars} />
 			</section>
 
 			<section>
@@ -45,32 +49,3 @@ const services = [
 ];
 
 export type Service = (typeof services)[number];
-
-const cars = [
-	{
-		id: 1,
-		name: 'Volkswagen Passat',
-		insuranceTo: '01/01/2024',
-		periodicServiceTo: '01/01/2024',
-		vin: '00000000000000000',
-		weight: 0,
-	},
-	{
-		id: 2,
-		name: 'Opel Astra',
-		insuranceTo: '01/01/2024',
-		periodicServiceTo: '01/01/2024',
-		vin: '00000000000000000',
-		weight: 1,
-	},
-	{
-		id: 3,
-		name: 'Honda Civic',
-		insuranceTo: '01/01/2024',
-		periodicServiceTo: '01/01/2024',
-		vin: '00000000000000000',
-		weight: 2,
-	},
-];
-
-export type Car = (typeof cars)[number];

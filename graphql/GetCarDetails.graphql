@@ -1,7 +1,23 @@
-query GetCarDetails($carId: Int!) {
-    getCarDetails(params: { carId: $carId }) {
-        car {
-            id
+query GetUserCars($limit: Int!) {
+    getUserCars (params: {limit: $limit}) {
+        cars {
+
+            ...UserCar
         }
     }
+}
+
+fragment UserCar on Car {
+        id,
+        name,
+        vin,
+        weight,
+        Insurance {
+            id,
+            expiredAt
+        },
+        PeriodicService {
+            id,
+            expiredAt
+        }
 }

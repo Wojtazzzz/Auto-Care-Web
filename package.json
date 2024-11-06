@@ -13,12 +13,18 @@
 		"@auth0/nextjs-auth0": "^3.5.0",
 		"clsx": "^2.1.1",
 		"graphql": "^16.9.0",
+		"moment": "^2.30.1",
 		"next": "15.0.2",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "5.0.3",
+		"@graphql-codegen/client-preset": "4.5.0",
+		"@graphql-codegen/typescript": "^4.1.1",
+		"@graphql-codegen/typescript-operations": "^4.3.1",
+		"@graphql-codegen/typescript-react-apollo": "^4.3.2",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
@@ -28,11 +34,6 @@
 		"postcss": "^8",
 		"prettier": "3.3.3",
 		"tailwindcss": "^3.4.1",
-		"typescript": "^5",
-		"@graphql-codegen/cli": "5.0.3",
-		"@graphql-codegen/client-preset": "4.5.0",
-		"@graphql-codegen/typescript": "^4.1.1",
-		"@graphql-codegen/typescript-operations": "^4.3.1",
-		"@graphql-codegen/typescript-react-apollo": "^4.3.2"
+		"typescript": "^5"
 	}
 }

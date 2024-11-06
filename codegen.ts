@@ -7,6 +7,9 @@ const config: CodegenConfig = {
 	generates: {
 		'gql/': {
 			preset: 'client',
+			presetConfig: {
+				fragmentMasking: false,
+			},
 			config: {
 				documentMode: 'string',
 			},
