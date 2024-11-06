@@ -31,6 +31,16 @@ export type Car = {
   weight: Scalars['Int']['output'];
 };
 
+export type GetCarServicesRequest = {
+  carId?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type GetCarServicesResponse = {
+  __typename?: 'GetCarServicesResponse';
+  services: Array<Service>;
+};
+
 export type GetUserCarsRequest = {
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -54,13 +64,26 @@ export type PeriodicService = {
 
 export type Query = {
   __typename?: 'Query';
+  getCarServices: GetCarServicesResponse;
   getUserCars: GetUserCarsResponse;
   verify: AuthUserVerification;
 };
 
 
+export type QueryGetCarServicesArgs = {
+  params: GetCarServicesRequest;
+};
+
+
 export type QueryGetUserCarsArgs = {
   params: GetUserCarsRequest;
+};
+
+export type Service = {
+  __typename?: 'Service';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type GetUserCarsQueryVariables = Exact<{
@@ -71,6 +94,14 @@ export type GetUserCarsQueryVariables = Exact<{
 export type GetUserCarsQuery = { __typename?: 'Query', getUserCars: { __typename?: 'GetUserCarsResponse', cars: Array<{ __typename?: 'Car', id: number, name: string, vin: string, weight: number, Insurance: Array<{ __typename?: 'Insurance', id: number, expiredAt: string }>, PeriodicService: Array<{ __typename?: 'PeriodicService', id: number, expiredAt: string }> }> } };
 
 export type UserCarFragment = { __typename?: 'Car', id: number, name: string, vin: string, weight: number, Insurance: Array<{ __typename?: 'Insurance', id: number, expiredAt: string }>, PeriodicService: Array<{ __typename?: 'PeriodicService', id: number, expiredAt: string }> };
+
+export type GetCarServicesQueryVariables = Exact<{
+  carId?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetCarServicesQuery = { __typename?: 'Query', getCarServices: { __typename?: 'GetCarServicesResponse', services: Array<{ __typename?: 'Service', id: number, name: string, createdAt: string }> } };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -124,3 +155,14 @@ export const GetUserCarsDocument = new TypedDocumentString(`
     expiredAt
   }
 }`) as unknown as TypedDocumentString<GetUserCarsQuery, GetUserCarsQueryVariables>;
+export const GetCarServicesDocument = new TypedDocumentString(`
+    query GetCarServices($carId: Int, $limit: Int) {
+  getCarServices(params: {carId: $carId, limit: $limit}) {
+    services {
+      id
+      name
+      createdAt
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<GetCarServicesQuery, GetCarServicesQueryVariables>;

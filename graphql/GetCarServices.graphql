@@ -1,0 +1,9 @@
+query GetCarServices($carId: Int, $limit: Int) {
+    getCarServices (params: { carId: $carId, limit: $limit }) {
+        services {
+            id,
+            name,
+            createdAt
+        }
+    }
+}

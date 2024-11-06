@@ -1,16 +1,26 @@
 import { ServiceItem } from '@/components/service-item';
-import { Service } from '@/app/(dashboard)/page';
+import { fetchGraphData } from '@/utils/functions';
+import { GetCarServicesDocument } from '../../../../gql/graphql';
 
 type ServicesListProps = {
-	services: Service[];
+	mainCarId: number | null;
 };
 
-export const ServicesList = ({ services }: ServicesListProps) => {
+export const ServicesList = async ({ mainCarId }: ServicesListProps) => {
+	const { data } = await fetchGraphData(GetCarServicesDocument, {
+		carId: mainCarId,
+		limit: 5,
+	});
+
+	if (!data || data.getCarServices.services.length === 0) {
+		return <span>No services</span>;
+	}
+
 	return (
 		<ol className="space-y-4">
-			{services.map((service) => (
+			{data.getCarServices.services.map((service) => (
 				<li key={service.id}>
-					<ServiceItem name={service.title} date="01/01/2024" />
+					<ServiceItem name={service.name} date={service.createdAt} />
 				</li>
 			))}
 		</ol>

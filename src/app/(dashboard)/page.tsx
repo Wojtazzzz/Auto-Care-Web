@@ -26,31 +26,8 @@ export default async function DashboardPage({
 					Ostatnie serwisy
 				</h2>
 
-				<ServicesList services={services} />
+				<ServicesList mainCarId={mainCarId} />
 			</section>
 		</div>
 	);
 }
-
-const services = [
-	{
-		id: 1,
-		icon: 'briefcase',
-		title: 'Business loans',
-		subtitle: 'It is a long established',
-	},
-	{
-		id: 2,
-		icon: 'bank',
-		title: 'Checking accounts',
-		subtitle: 'Lorem Ipsum',
-	},
-	{
-		id: 3,
-		icon: 'chart',
-		title: 'Savings accounts',
-		subtitle: 'It is a long established',
-	},
-];
-
-export type Service = (typeof services)[number];
