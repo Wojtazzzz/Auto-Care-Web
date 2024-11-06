@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 				<Sidebar />
 				<Header />
 
-				<div className="pl-72 pt-28">{children}</div>
+				<div className="pl-72 pt-[98px] pr-8">{children}</div>
 			</main>
 		</UserProvider>
 	);
