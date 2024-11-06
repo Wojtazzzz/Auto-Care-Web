@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function AuthPage() {
 	return (
-		<div className="">
+		<div>
 			<Link href="/api/auth/login">Logowanie do serwisu</Link>
 		</div>
 	);
