@@ -2,6 +2,8 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { SearchIcon } from '@/components/icons/SearchIcon';
 import { SettingsIcon } from '@/components/icons/SettingsIcon';
 import { NotificationIcon } from '@/components/icons/NotificationIcon';
+import Link from 'next/link';
+import { ExitIcon } from '@/components/icons/ExitIcon';
 
 export const Header = async () => {
 	const session = await getSession();
@@ -36,6 +38,14 @@ export const Header = async () => {
 				>
 					<NotificationIcon />
 				</button>
+
+				<Link
+					className="bg-gray-100 p-2 rounded-full hover:bg-gray-200"
+					aria-label="Powiadomienia"
+					href="/api/auth/logout"
+				>
+					<ExitIcon />
+				</Link>
 
 				<img
 					src={session?.user.picture}
