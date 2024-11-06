@@ -1,10 +1,15 @@
 import { ServicesList } from '@/components/modules/dashboard/services-list';
 import { MyCarsList } from '@/components/modules/dashboard/my-cars';
-import { fetchGraphData } from '@/utils/functions';
-import { GetUserCarsDocument } from '../../../gql/graphql';
 
-export default async function DashboardPage() {
-	const { data } = await fetchGraphData(GetUserCarsDocument, { limit: 5 });
+type DashboardPageProps = {
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default async function DashboardPage({
+	searchParams,
+}: DashboardPageProps) {
+	const mainCarIdParam = Number((await searchParams).mainCarId);
+	const mainCarId = isNaN(mainCarIdParam) ? null : mainCarIdParam;
 
 	return (
 		<div className="space-y-8">
@@ -13,7 +18,7 @@ export default async function DashboardPage() {
 					Moje pojazdy
 				</h2>
 
-				<MyCarsList cars={data?.getUserCars.cars} />
+				<MyCarsList mainCarId={mainCarId} />
 			</section>
 
 			<section>

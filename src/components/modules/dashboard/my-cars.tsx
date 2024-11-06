@@ -1,27 +1,24 @@
 import { CarCard } from '@/components/car-card';
 import { fetchGraphData } from '@/utils/functions';
-import { GetUserCarsDocument, UserCarFragment } from '../../../../gql/graphql';
+import { GetUserCarsDocument } from '../../../../gql/graphql';
 
 type MyCarsListProps = {
-	cars: UserCarFragment[] | undefined;
+	mainCarId: number | null;
 };
 
-export const MyCarsList = async ({ cars }: MyCarsListProps) => {
-	const data = await fetchGraphData(GetUserCarsDocument, {
-		limit: 1,
-	});
+export const MyCarsList = async ({ mainCarId }: MyCarsListProps) => {
+	const { data } = await fetchGraphData(GetUserCarsDocument, { limit: 5 });
 
-	console.log('Cars: ', data);
-
-	if (!cars) {
+	if (!data || data.getUserCars.cars.length === 0) {
 		return <span>No cars</span>;
 	}
 
 	return (
 		<ol className="flex gap-4">
-			{cars.map((car) => (
+			{data.getUserCars.cars.map((car) => (
 				<li key={car.id}>
 					<CarCard
+						id={car.id}
 						name={car.name}
 						vin={car.vin}
 						insuranceTo={
@@ -32,7 +29,9 @@ export const MyCarsList = async ({ cars }: MyCarsListProps) => {
 								? car.PeriodicService[0].expiredAt
 								: null
 						}
-						weight={car.weight}
+						isMain={
+							mainCarId === null ? car.weight === 0 : car.id === mainCarId
+						}
 					/>
 				</li>
 			))}
