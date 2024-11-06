@@ -1,21 +1,23 @@
 import { type ReactNode } from 'react';
 import { Header } from '@/components/header';
 import { Sidebar } from '@/components/sidebar';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { authGuard } from '@/utils/guards';
 
 type DashboardLayoutProps = Readonly<{
 	children: ReactNode;
 }>;
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
-	return (
-		<UserProvider>
-			<main className="bg-gray-50 min-h-screen">
-				<Sidebar />
-				<Header />
+export default async function DashboardLayout({
+	children,
+}: DashboardLayoutProps) {
+	await authGuard();
 
-				<div className="pl-72 pt-[98px] pr-8">{children}</div>
-			</main>
-		</UserProvider>
+	return (
+		<main className="bg-gray-50 min-h-screen">
+			<Sidebar />
+			<Header />
+
+			<div className="pl-72 pt-[98px] pr-8">{children}</div>
+		</main>
 	);
 }

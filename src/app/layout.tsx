@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { type ReactNode } from 'react';
 import '../assets/globals.css';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -30,7 +31,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				{children}
+				<UserProvider>{children}</UserProvider>
 			</body>
 		</html>
 	);
