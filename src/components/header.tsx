@@ -41,7 +41,7 @@ export const Header = async () => {
 
 				<Link
 					className="bg-gray-100 p-2 rounded-full hover:bg-gray-200"
-					aria-label="Powiadomienia"
+					aria-label="Logout"
 					href="/api/auth/logout"
 				>
 					<ExitIcon />
