@@ -2,6 +2,8 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { TypedDocumentString } from '../../gql/graphql';
 import { GraphQLError } from 'graphql/error';
 import moment from 'moment';
+import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 type GraphQLResponse<GraphQLData> =
 	| { data: GraphQLData }
@@ -43,3 +45,7 @@ export const fetchGraphData = async <Result, Variables>(
 export const formatUnixDate = (date: string | number, format: string) => {
 	return moment.unix(Number(date) / 1000).format(format);
 };
+
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}
