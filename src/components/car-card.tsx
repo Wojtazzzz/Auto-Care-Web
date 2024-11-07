@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { formatUnixDate } from '@/utils/functions';
-import Link from 'next/link';
+import { PrefetchLink } from '@/components/ui/prefetch-link';
 
 type CarCardProps = {
 	id: number;
@@ -20,7 +20,7 @@ export const CarCard = ({
 	isMain,
 }: CarCardProps) => {
 	return (
-		<Link href={`/?mainCarId=${id}`}>
+		<PrefetchLink href={`/?mainCarId=${id}`}>
 			<div
 				className={clsx(
 					'flex flex-col justify-around w-80 h-48 rounded-xl p-4 shadow-lg',
@@ -59,6 +59,6 @@ export const CarCard = ({
 					<span className="text-lg tracking-widest font-semibold">{vin}</span>
 				</div>
 			</div>
-		</Link>
+		</PrefetchLink>
 	);
 };
