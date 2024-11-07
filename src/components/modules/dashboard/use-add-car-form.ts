@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -24,14 +24,15 @@ export const useAddCarForm = () => {
 		},
 	});
 
-	const onSubmit: SubmitHandler<FormValues> = (data) => {
-		alert(JSON.stringify(data));
-	};
+	const submit = (callback: (payload: FormValues) => void) =>
+		handleSubmit((values: FormValues) => {
+			return callback(values);
+		});
 
 	return {
 		register,
-		handleSubmit,
 		errors,
-		onSubmit,
+		handleSubmit,
+		submit,
 	};
 };

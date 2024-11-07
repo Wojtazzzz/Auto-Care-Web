@@ -13,13 +13,22 @@ import { Form } from '@/components/ui/form/form';
 import { FormControl } from '@/components/ui/form/form-controler';
 import { DialogFooter } from '@/components/ui/dialog/dialog-footer';
 import { DialogContent } from '@/components/ui/dialog/dialog-content';
-import { useAddCarForm } from '@/components/modules/dashboard/useAddCarForm';
+import { useAddCarForm } from '@/components/modules/dashboard/use-add-car-form';
+import { useBoolean } from '@/hooks/useBoolean';
+import { createCar } from '@/utils/actions';
 
 export const AddCarDialog = () => {
-	const { register, errors, handleSubmit, onSubmit } = useAddCarForm();
+	const { register, errors, submit } = useAddCarForm();
+	const { state: isOpen, setValue: setOpen } = useBoolean();
+
+	const onSubmit = submit(async (values) => {
+		await createCar(values);
+	});
+
+	const isPending = false;
 
 	return (
-		<Dialog>
+		<Dialog open={isOpen} onOpenChange={setOpen}>
 			<DialogTrigger>
 				<Button variant="default">Dodaj pojazd</Button>
 			</DialogTrigger>
@@ -32,7 +41,7 @@ export const AddCarDialog = () => {
 					</DialogDescription>
 				</DialogHeader>
 				<DialogContent>
-					<Form id="add-car" noValidate onSubmit={handleSubmit(onSubmit)}>
+					<Form id="add-car" noValidate onSubmit={onSubmit}>
 						<FormControl>
 							<Label htmlFor="add-car-name">Nazwa</Label>
 							<Input
@@ -62,7 +71,12 @@ export const AddCarDialog = () => {
 					</Form>
 				</DialogContent>
 				<DialogFooter>
-					<Button variant="default" type="submit" form="add-car">
+					<Button
+						variant="default"
+						isLoading={isPending}
+						type="submit"
+						form="add-car"
+					>
 						Dodaj
 					</Button>
 				</DialogFooter>

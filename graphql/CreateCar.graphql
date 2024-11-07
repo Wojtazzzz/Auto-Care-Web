@@ -1,0 +1,5 @@
+mutation CreateCar($name: String!, $vin: String!) {
+    createCar (params: { name: $name, vin: $vin }) {
+        created
+    }
+}

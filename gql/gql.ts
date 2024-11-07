@@ -15,11 +15,16 @@ import * as types from './graphql';
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "mutation CreateCar($name: String!, $vin: String!) {\n  createCar(params: {name: $name, vin: $vin}) {\n    created\n  }\n}": types.CreateCarDocument,
     "query GetUserCars($limit: Int!) {\n  getUserCars(params: {limit: $limit}) {\n    cars {\n      ...UserCar\n    }\n  }\n}\n\nfragment UserCar on Car {\n  id\n  name\n  vin\n  weight\n  Insurance {\n    id\n    expiredAt\n  }\n  PeriodicService {\n    id\n    expiredAt\n  }\n}": types.GetUserCarsDocument,
     "query GetCarServices($carId: Int, $limit: Int) {\n  getCarServices(params: {carId: $carId, limit: $limit}) {\n    services {\n      id\n      name\n      createdAt\n    }\n  }\n}": types.GetCarServicesDocument,
     "mutation VerifyUser {\n  verify {\n    authorized\n  }\n}": types.VerifyUserDocument,
 };
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CreateCar($name: String!, $vin: String!) {\n  createCar(params: {name: $name, vin: $vin}) {\n    created\n  }\n}"): typeof import('./graphql').CreateCarDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

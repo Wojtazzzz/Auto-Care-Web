@@ -31,6 +31,16 @@ export type Car = {
   weight: Scalars['Int']['output'];
 };
 
+export type CreateCarRequest = {
+  name: Scalars['String']['input'];
+  vin: Scalars['String']['input'];
+};
+
+export type CreateCarResponse = {
+  __typename?: 'CreateCarResponse';
+  created: Scalars['Boolean']['output'];
+};
+
 export type GetCarServicesRequest = {
   carId?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -58,7 +68,13 @@ export type Insurance = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCar: CreateCarResponse;
   verify: AuthUserVerification;
+};
+
+
+export type MutationCreateCarArgs = {
+  params: CreateCarRequest;
 };
 
 export type PeriodicService = {
@@ -89,6 +105,14 @@ export type Service = {
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
 };
+
+export type CreateCarMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  vin: Scalars['String']['input'];
+}>;
+
+
+export type CreateCarMutation = { __typename?: 'Mutation', createCar: { __typename?: 'CreateCarResponse', created: boolean } };
 
 export type GetUserCarsQueryVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -142,6 +166,13 @@ export const UserCarFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"UserCar"}) as unknown as TypedDocumentString<UserCarFragment, unknown>;
+export const CreateCarDocument = new TypedDocumentString(`
+    mutation CreateCar($name: String!, $vin: String!) {
+  createCar(params: {name: $name, vin: $vin}) {
+    created
+  }
+}
+    `) as unknown as TypedDocumentString<CreateCarMutation, CreateCarMutationVariables>;
 export const GetUserCarsDocument = new TypedDocumentString(`
     query GetUserCars($limit: Int!) {
   getUserCars(params: {limit: $limit}) {

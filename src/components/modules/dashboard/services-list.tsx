@@ -1,5 +1,5 @@
 import { ServiceItem } from '@/components/service-item';
-import { fetchGraphData } from '@/utils/functions';
+import { fetchGraphData } from '@/utils/fetchers';
 import { GetCarServicesDocument } from '../../../../gql/graphql';
 
 type ServicesListProps = {

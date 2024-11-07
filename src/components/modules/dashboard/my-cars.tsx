@@ -1,5 +1,5 @@
 import { CarCard } from '@/components/car-card';
-import { fetchGraphData } from '@/utils/functions';
+import { fetchGraphData } from '@/utils/fetchers';
 import { GetUserCarsDocument } from '../../../../gql/graphql';
 
 type MyCarsListProps = {
