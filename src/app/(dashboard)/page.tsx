@@ -1,6 +1,7 @@
 import { ServicesList } from '@/components/modules/dashboard/services-list';
 import { MyCarsList } from '@/components/modules/dashboard/my-cars';
 import { type SearchParams } from '@/utils/types';
+import { AddCarDialog } from '@/components/modules/dashboard/add-car-dialog';
 
 type DashboardPageProps = {
 	searchParams: SearchParams;
@@ -15,9 +16,13 @@ export default async function DashboardPage({
 	return (
 		<div className="space-y-8">
 			<section>
-				<h2 className="text-xl font-semibold text-gray-700 mb-6">
-					Moje pojazdy
-				</h2>
+				<header className="flex justify-between items-center">
+					<h2 className="text-xl font-semibold text-gray-700 mb-6">
+						Moje pojazdy
+					</h2>
+
+					<AddCarDialog />
+				</header>
 
 				<MyCarsList mainCarId={mainCarId} />
 			</section>

@@ -1,4 +1,3 @@
-import { DialogContent as UiDialogContent } from '@/components/ui-library/dialog';
 import { type ReactNode } from 'react';
 
 type DialogContentProps = {
@@ -6,5 +5,5 @@ type DialogContentProps = {
 };
 
 export const DialogContent = ({ children }: DialogContentProps) => {
-	return <UiDialogContent>{children}</UiDialogContent>;
+	return <div className="py-5">{children}</div>;
 };
