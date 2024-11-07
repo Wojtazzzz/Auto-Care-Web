@@ -13,7 +13,7 @@ export const fetchGraphData = async <Result, Variables>(
 ) => {
 	const session = await getSession();
 
-	const response = await fetch('http://localhost:8000/graphql', {
+	const response = await fetch(`${process.env.API_SERVER_URL}/graphql`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

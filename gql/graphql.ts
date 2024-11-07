@@ -56,6 +56,11 @@ export type Insurance = {
   id: Scalars['Int']['output'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  verify: AuthUserVerification;
+};
+
 export type PeriodicService = {
   __typename?: 'PeriodicService';
   expiredAt: Scalars['String']['output'];
@@ -66,7 +71,6 @@ export type Query = {
   __typename?: 'Query';
   getCarServices: GetCarServicesResponse;
   getUserCars: GetUserCarsResponse;
-  verify: AuthUserVerification;
 };
 
 
@@ -102,6 +106,11 @@ export type GetCarServicesQueryVariables = Exact<{
 
 
 export type GetCarServicesQuery = { __typename?: 'Query', getCarServices: { __typename?: 'GetCarServicesResponse', services: Array<{ __typename?: 'Service', id: number, name: string, createdAt: string }> } };
+
+export type VerifyUserMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type VerifyUserMutation = { __typename?: 'Mutation', verify: { __typename?: 'AuthUserVerification', authorized: boolean } };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -166,3 +175,10 @@ export const GetCarServicesDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<GetCarServicesQuery, GetCarServicesQueryVariables>;
+export const VerifyUserDocument = new TypedDocumentString(`
+    mutation VerifyUser {
+  verify {
+    authorized
+  }
+}
+    `) as unknown as TypedDocumentString<VerifyUserMutation, VerifyUserMutationVariables>;

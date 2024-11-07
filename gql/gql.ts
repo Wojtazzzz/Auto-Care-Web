@@ -17,6 +17,7 @@ import * as types from './graphql';
 const documents = {
     "query GetUserCars($limit: Int!) {\n  getUserCars(params: {limit: $limit}) {\n    cars {\n      ...UserCar\n    }\n  }\n}\n\nfragment UserCar on Car {\n  id\n  name\n  vin\n  weight\n  Insurance {\n    id\n    expiredAt\n  }\n  PeriodicService {\n    id\n    expiredAt\n  }\n}": types.GetUserCarsDocument,
     "query GetCarServices($carId: Int, $limit: Int) {\n  getCarServices(params: {carId: $carId, limit: $limit}) {\n    services {\n      id\n      name\n      createdAt\n    }\n  }\n}": types.GetCarServicesDocument,
+    "mutation VerifyUser {\n  verify {\n    authorized\n  }\n}": types.VerifyUserDocument,
 };
 
 /**
@@ -27,6 +28,10 @@ export function graphql(source: "query GetUserCars($limit: Int!) {\n  getUserCar
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GetCarServices($carId: Int, $limit: Int) {\n  getCarServices(params: {carId: $carId, limit: $limit}) {\n    services {\n      id\n      name\n      createdAt\n    }\n  }\n}"): typeof import('./graphql').GetCarServicesDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation VerifyUser {\n  verify {\n    authorized\n  }\n}"): typeof import('./graphql').VerifyUserDocument;
 
 
 export function graphql(source: string) {
