@@ -1,8 +1,9 @@
 import { ServicesList } from '@/components/modules/dashboard/services-list';
 import { MyCarsList } from '@/components/modules/dashboard/my-cars';
+import { type SearchParams } from '@/utils/types';
 
 type DashboardPageProps = {
-	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+	searchParams: SearchParams;
 };
 
 export default async function DashboardPage({
